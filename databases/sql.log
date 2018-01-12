@@ -1,0 +1,181 @@
+timestamp: 2018-01-12T16:13:56.099000
+CREATE TABLE `auth_user`(
+    `id` INT AUTO_INCREMENT NOT NULL,
+    `first_name` VARCHAR(128),
+    `last_name` VARCHAR(128),
+    `email` VARCHAR(512),
+    `password` VARCHAR(512),
+    `registration_key` VARCHAR(512),
+    `reset_password_key` VARCHAR(512),
+    `registration_id` VARCHAR(512),
+    PRIMARY KEY (`id`)
+) ENGINE=InnoDB CHARACTER SET utf8;
+success!
+timestamp: 2018-01-12T16:13:56.385000
+CREATE TABLE `auth_group`(
+    `id` INT AUTO_INCREMENT NOT NULL,
+    `role` VARCHAR(512),
+    `description` LONGTEXT,
+    PRIMARY KEY (`id`)
+) ENGINE=InnoDB CHARACTER SET utf8;
+success!
+timestamp: 2018-01-12T16:13:56.557000
+CREATE TABLE `auth_membership`(
+    `id` INT AUTO_INCREMENT NOT NULL,
+    `user_id` INT  , INDEX `user_id__idx` (`user_id`), FOREIGN KEY (`user_id`) REFERENCES `auth_user` (`id`) ON DELETE CASCADE,
+    `group_id` INT  , INDEX `group_id__idx` (`group_id`), FOREIGN KEY (`group_id`) REFERENCES `auth_group` (`id`) ON DELETE CASCADE,
+    PRIMARY KEY (`id`)
+) ENGINE=InnoDB CHARACTER SET utf8;
+success!
+timestamp: 2018-01-12T16:13:56.781000
+CREATE TABLE `auth_permission`(
+    `id` INT AUTO_INCREMENT NOT NULL,
+    `group_id` INT  , INDEX `group_id__idx` (`group_id`), FOREIGN KEY (`group_id`) REFERENCES `auth_group` (`id`) ON DELETE CASCADE,
+    `name` VARCHAR(512),
+    `table_name` VARCHAR(512),
+    `record_id` INTEGER,
+    PRIMARY KEY (`id`)
+) ENGINE=InnoDB CHARACTER SET utf8;
+success!
+timestamp: 2018-01-12T16:13:56.985000
+CREATE TABLE `auth_event`(
+    `id` INT AUTO_INCREMENT NOT NULL,
+    `time_stamp` DATETIME,
+    `client_ip` VARCHAR(512),
+    `user_id` INT  , INDEX `user_id__idx` (`user_id`), FOREIGN KEY (`user_id`) REFERENCES `auth_user` (`id`) ON DELETE CASCADE,
+    `origin` VARCHAR(512),
+    `description` LONGTEXT,
+    PRIMARY KEY (`id`)
+) ENGINE=InnoDB CHARACTER SET utf8;
+success!
+timestamp: 2018-01-12T16:13:57.187000
+CREATE TABLE `auth_cas`(
+    `id` INT AUTO_INCREMENT NOT NULL,
+    `user_id` INT  , INDEX `user_id__idx` (`user_id`), FOREIGN KEY (`user_id`) REFERENCES `auth_user` (`id`) ON DELETE CASCADE,
+    `created_on` DATETIME,
+    `service` VARCHAR(512),
+    `ticket` VARCHAR(512),
+    `renew` CHAR(1),
+    PRIMARY KEY (`id`)
+) ENGINE=InnoDB CHARACTER SET utf8;
+success!
+timestamp: 2018-01-12T17:15:12.294000
+CREATE TABLE `oc_manufacturers`(
+    `manufacturer_id` VARCHAR(512) NOT NULL,
+    `name` VARCHAR(512),
+    `image` VARCHAR(512),
+    `sort_order` VARCHAR(512),
+    PRIMARY KEY(`manufacturer_id`))  ENGINE=InnoDB CHARACTER SET utf8;
+timestamp: 2018-01-12T17:15:14.463000
+CREATE TABLE `oc_manufacturers`(
+    `manufacturer_id` VARCHAR(512) NOT NULL,
+    `name` VARCHAR(512),
+    `image` VARCHAR(512),
+    `sort_order` VARCHAR(512),
+    PRIMARY KEY(`manufacturer_id`))  ENGINE=InnoDB CHARACTER SET utf8;
+timestamp: 2018-01-12T17:15:15.164000
+CREATE TABLE `oc_manufacturers`(
+    `manufacturer_id` VARCHAR(512) NOT NULL,
+    `name` VARCHAR(512),
+    `image` VARCHAR(512),
+    `sort_order` VARCHAR(512),
+    PRIMARY KEY(`manufacturer_id`))  ENGINE=InnoDB CHARACTER SET utf8;
+timestamp: 2018-01-12T17:15:15.844000
+CREATE TABLE `oc_manufacturers`(
+    `manufacturer_id` VARCHAR(512) NOT NULL,
+    `name` VARCHAR(512),
+    `image` VARCHAR(512),
+    `sort_order` VARCHAR(512),
+    PRIMARY KEY(`manufacturer_id`))  ENGINE=InnoDB CHARACTER SET utf8;
+timestamp: 2018-01-12T17:15:18.713000
+CREATE TABLE `oc_manufacturers`(
+    `manufacturer_id` VARCHAR(512) NOT NULL,
+    `name` VARCHAR(512),
+    `image` VARCHAR(512),
+    `sort_order` VARCHAR(512),
+    PRIMARY KEY(`manufacturer_id`))  ENGINE=InnoDB CHARACTER SET utf8;
+timestamp: 2018-01-12T17:15:55.820000
+CREATE TABLE `oc_manufacturers`(
+    `manufacturer_id` INTEGER NOT NULL,
+    `name` VARCHAR(512),
+    `image` VARCHAR(512),
+    `sort_order` INTEGER,
+    PRIMARY KEY(`manufacturer_id`))  ENGINE=InnoDB CHARACTER SET utf8;
+success!
+timestamp: 2018-01-12T17:20:25.457000
+CREATE TABLE `oc_manufacturer`(
+    `manufacturer_id` INTEGER NOT NULL,
+    `name` VARCHAR(255) NOT NULL,
+    `image` VARCHAR(64) NOT NULL,
+    `sort_order` INTEGER,
+    PRIMARY KEY(`manufacturer_id`))  ENGINE=InnoDB CHARACTER SET utf8;
+timestamp: 2018-01-12T17:20:30.365000
+CREATE TABLE `oc_manufacturer`(
+    `manufacturer_id` INTEGER NOT NULL,
+    `name` VARCHAR(255) NOT NULL,
+    `image` VARCHAR(64) NOT NULL,
+    `sort_order` INTEGER,
+    PRIMARY KEY(`manufacturer_id`))  ENGINE=InnoDB CHARACTER SET utf8;
+timestamp: 2018-01-12T17:20:34.852000
+CREATE TABLE `oc_manufacturer`(
+    `manufacturer_id` INTEGER NOT NULL,
+    `name` VARCHAR(255) NOT NULL,
+    `image` VARCHAR(64) NOT NULL,
+    `sort_order` INTEGER,
+    PRIMARY KEY(`manufacturer_id`))  ENGINE=InnoDB CHARACTER SET utf8;
+timestamp: 2018-01-12T17:22:25.439000
+ALTER TABLE `oc_manufacturers` ADD `name__tmp` VARCHAR(255) NOT NULL;
+success!
+UPDATE `oc_manufacturers` SET `name__tmp`=`name`;
+success!
+ALTER TABLE `oc_manufacturers` DROP COLUMN `name`;
+success!
+ALTER TABLE `oc_manufacturers` ADD `name` VARCHAR(255) NOT NULL;
+success!
+UPDATE `oc_manufacturers` SET `name`=`name__tmp`;
+success!
+ALTER TABLE `oc_manufacturers` DROP COLUMN `name__tmp`;
+success!
+timestamp: 2018-01-12T17:22:26.889000
+ALTER TABLE `oc_manufacturers` ADD `image__tmp` VARCHAR(64) NOT NULL;
+success!
+UPDATE `oc_manufacturers` SET `image__tmp`=`image`;
+success!
+ALTER TABLE `oc_manufacturers` DROP COLUMN `image`;
+success!
+ALTER TABLE `oc_manufacturers` ADD `image` VARCHAR(64) NOT NULL;
+success!
+UPDATE `oc_manufacturers` SET `image`=`image__tmp`;
+success!
+ALTER TABLE `oc_manufacturers` DROP COLUMN `image__tmp`;
+success!
+timestamp: 2018-01-12T17:23:28.261000
+CREATE TABLE `oc_manufacturer`(
+    `manufacturer_id` INTEGER NOT NULL,
+    `name` VARCHAR(255) NOT NULL,
+    `image` VARCHAR(64) NOT NULL,
+    `sort_order` INTEGER,
+    PRIMARY KEY(`manufacturer_id`))  ENGINE=InnoDB CHARACTER SET utf8;
+timestamp: 2018-01-12T17:24:25.903000
+CREATE TABLE `pb_manufacturers`(
+    `manufacturer_id` INTEGER NOT NULL,
+    `name` VARCHAR(255) NOT NULL,
+    `image` VARCHAR(64) NOT NULL,
+    `sort_order` INTEGER,
+    PRIMARY KEY(`manufacturer_id`))  ENGINE=InnoDB CHARACTER SET utf8;
+success!
+timestamp: 2018-01-12T17:27:15.946000
+CREATE TABLE `oc_manufacturer`(
+    `manufacturer_id` INTEGER NOT NULL,
+    `name` VARCHAR(255) NOT NULL,
+    `image` VARCHAR(64) NOT NULL,
+    `sort_order` INTEGER,
+    PRIMARY KEY(`manufacturer_id`))  ENGINE=InnoDB CHARACTER SET utf8;
+timestamp: 2018-01-12T17:28:03.644000
+CREATE TABLE `oc_manufacturer`(
+    `manufacturer_id` INTEGER NOT NULL,
+    `name` VARCHAR(255) NOT NULL,
+    `image` VARCHAR(64) NOT NULL,
+    `sort_order` INTEGER,
+    PRIMARY KEY(`manufacturer_id`))  ENGINE=InnoDB CHARACTER SET utf8;
+success!
